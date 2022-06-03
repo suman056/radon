@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const Name=require('./../playersname/playername')
 
 router.get('/students/:name', function(req, res) {
     let studentName = req.params.name
@@ -50,16 +51,22 @@ router.post("/test-post-2", function(req, res) {
     res.send(  { msg: "hi" , status: true }  )
 })
 
-router.post("/test-post-3", function(req, res) {
-    // let id = req.body.user
-    // let pwd= req.body.password
-
-    // console.log( id , pwd)
-
-    console.log( req.body )
-
-    res.send(  { msg: "hi" , status: true }  )
-})
+router.post("/player", function(req, res) {
+      
+    let nameFromBody=req.body
+      for (let x=0;x<Name.playerName.length;x++)
+      {
+        if(nameFromBody.name===Name.playerName[x].name&&nameFromBody.dob===Name.playerName[x].dob&&nameFromBody.gender===Name.playerName[x].gender&&nameFromBody.city===Name.playerName[x].city&&nameFromBody.sports[0]===Name.playerName[x].sports[0]){
+            res.send(  { data:nameFromBody.name, status:true  })
+            break;
+            }
+           
+      }
+      
+        res.send(  { data: nameFromBody.name, status:false })
+        
+     
+    })
 
 
 
