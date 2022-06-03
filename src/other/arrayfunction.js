@@ -7,6 +7,7 @@ let size=3
     t=t+1
     x.push(t)
  }
+ 
 let z=[1,2,3]
 let t=[2,5,6]
 let j=[7,5,9]
@@ -15,8 +16,9 @@ let i=[15,3,11]
 
 
 let y=[ ["horror","The Shining"], ["drama","Titanic"],["thriller","Shutter Island"],["fantasy","Pans Labyrinth"]]
-
+ 
 let a=_.chunk(arrOfMonth,size)
+
 module.exports.tailNumber=_.tail(x)
 module.exports.monthDivide=a
 module.exports.mergerArray1=_.union(z,t,j,h,i)
