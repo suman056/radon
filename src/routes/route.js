@@ -1,41 +1,49 @@
 const express = require('express');
-const myHelper = require('../util/helper')
+
 const underscore = require('underscore')
+const movies=require('./../movieslist/movieslist')
 
 const router = express.Router();
 
-router.get('/test-me', function (req, res) {
-    myHelper.printDate()
-    myHelper.getCurrentMonth()
-    myHelper.getCohortData()
-    let firstElement = underscore.first(['Sabiha','Akash','Pritesh'])
-    console.log('The first element received from underscope function is '+firstElement)
-    res.send('My first ever api!')
-});
 
-router.get('/hello', function (req, res) {
-   
-    res.send('Hello there!')
-});
 
-router.get('/candidates', function(req, res){
-    console.log('Query paramters for this request are '+JSON.stringify(req.query))
-    let gender = req.query.gender
-    let state = req.query.state
-    let district = req.query.district
-    console.log('State is '+state)
-    console.log('Gender is '+gender)
-    console.log('District is '+district)
-    let candidates = ['Akash','Suman']
-    res.send(candidates)
+router.get('/films/:filmId', function(req, res){
+    if(req.params.filmId>movies.filmlist.length){
+        res.send('No movie exist with this Id')
+    }
+    for(let i=0;i<movies.filmlist.length;i++){
+    if(req.params.filmId==i){
+    res.send('the film is'+JSON.stringify(movies.filmlist[i]))
+}
+}
+
 })
 
-router.get('/candidates/:canidatesName', function(req, res){
-    console.log('The request objects is '+ JSON.stringify(req.params))
-    console.log('Candidates name is '+req.params.canidatesName)
-    res.send('Done')
-})
-
-
+router.get('/films', function(req, res){
+    let x=JSON.stringify(movies.filmlist)
+    res.send(x)
+});
+router.get('/movies', function (req, res) {
+    console.log('the movie names are' +JSON.stringify(movies.movielist))
+    res.send('My third ever api!')
+});
+router.get('/movies/:indexNumber', function (req, res) {
+    if(req.params.indexNumber>movies.movielist.length){
+        res.send('invalid index number')
+           console.log('error')
+           
+    }
+    for (let i=0;i<movies.movielist.length;i++){
+        if(req.params.indexNumber==i){
+               
+            res.send(movies.movielist)
+            console.log( movies.movielist[req.params.indexNumber])
+        }
+    }
+}
+    
+    
+);
+ 
 module.exports = router;
 // adding this comment for no reason
