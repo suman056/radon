@@ -3,6 +3,7 @@ const AuthorModel= require("../models/authorModel")
 
 const BookModel= require("../models/bookModel")
 
+const number=require("../routes/route")
 
 const createAuthor= async function (req, res) {
     let data= req.body
@@ -22,15 +23,15 @@ const createBook= async function (req, res) {
 // }
 const bookByChetanBhagat= async function (req, res) {
     let iD= await AuthorModel.find({ author_name:"Chetan Bhagat"}).select({author_id:1,_id:0})
-   
-     let bookdata= await BookModel.find(iD[0])
+     
+      let bookdata= await BookModel.find(iD[0]).select({name:1,_id:0})
     
     res.send({msg:bookdata})}
 
 
 
 const updateBookPrice= async function (req,res) {
-    let book=await BookModel.find().findOneAndUpdate({name:"Two states"},{$set:{price:100}},{new:true}).select({author_id:1,_id:0})
+    let book=await BookModel.findOneAndUpdate({name:"Two states"},{$set:{price:100}},{new:true}).select({author_id:1,_id:0})
     
      let authorData= await AuthorModel.find(book).select({author_name:1,_id:0})
       let price=await BookModel.find({name:"Two states"}).select({price:1,_id:0})
@@ -39,15 +40,18 @@ const updateBookPrice= async function (req,res) {
 
 
 
-// const findBookByCost= async function (req, res) {
-//     let book1= await BookModel.find({price:{$gte:50,$lte:100}}).select({author_id:1,_id:0})
-//     let book2=  book1.map(x=> await AuthorModel.find(x))
+const findBookByCost= async function (req, res) {
+    let book1= await BookModel.find({price:{$gte:50,$lte:100}}).select({author_id:1,_id:0})
+    let x=book1.map(a=>a.author_id)
+    let uniq = [...new Set(x)];
+    let authorname=await AuthorModel.find({author_id:uniq.map(x=>x)}).select({author_name:1,_id:0})
+    res.send({msg:authorname})
+}  
+
+
+
+
     
-   
-//     res.send({msg:book2})}
-  
-
-
 
 module.exports.createAuthor= createAuthor
 // module.exports.getUsersData= getUsersData
@@ -58,4 +62,4 @@ module.exports.bookByChetanBhagat=bookByChetanBhagat
 module.exports.updateBookPrice=updateBookPrice
 
 
-// module.exports.findBookByCost=findBookByCost
+module.exports.findBookByCost=findBookByCost

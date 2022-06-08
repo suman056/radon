@@ -12,6 +12,6 @@ const bookSchema = new mongoose.Schema( {
 module.exports = mongoose.model('Book', bookSchema) //users
 
 
-
-// String, Number
-// Boolean, Object/json, array
+//  git checkout 
+//  npm install lodash mongoose nodemon 
+// Boolean, Object/json, array $eq
