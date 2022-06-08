@@ -39,12 +39,12 @@ const updateBookPrice= async function (req,res) {
 
 
 
-const findBookByCost= async function (req, res) {
-    let book1= await BookModel.find({price:{$gte:50,$lte:100}}).select({author_id:1,_id:0})
-    let book2=  book1.map(x=> await AuthorModel.find(x))
+// const findBookByCost= async function (req, res) {
+//     let book1= await BookModel.find({price:{$gte:50,$lte:100}}).select({author_id:1,_id:0})
+//     let book2=  book1.map(x=> await AuthorModel.find(x))
     
    
-    res.send({msg:book2})}
+//     res.send({msg:book2})}
   
 
 
@@ -58,4 +58,4 @@ module.exports.bookByChetanBhagat=bookByChetanBhagat
 module.exports.updateBookPrice=updateBookPrice
 
 
-module.exports.findBookByCost=findBookByCost
+// module.exports.findBookByCost=findBookByCost

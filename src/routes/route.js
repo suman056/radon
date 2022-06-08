@@ -24,7 +24,7 @@ router.post("/updateBookPrice", Controller.updateBookPrice)
 
 
 
-router.get("/findBookByCost", Controller.findBookByCost)
+// router.get("/findBookByCost", Controller.findBookByCost)
 
 
 
