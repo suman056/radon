@@ -50,12 +50,10 @@ const getUserData = async function (req, res) {
   let token = req.headers["x-Auth-token"];
   if (!token) token = req.headers["x-auth-token"];
 
-  console.log(token);
-  
  
-  let decodedToken = await jwt.verify(token, "functionup-radon");
-  if (!decodedToken)
-    return res.send({ status: false, msg: "token is invalid" });
+  
+   
+  
 
   let userId = req.params.userId;
   let userDetails = await userModel.findById(userId);
