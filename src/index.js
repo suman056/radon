@@ -18,6 +18,6 @@ mongoose.connect("mongodb+srv://suman:Mdhang%40123@atlascluster.tlenk.mongodb.ne
 app.use('/', route)
 
 
-app.listen(process.env.PORT || 4080, function () {
-    console.log('Express app running on port ' + (process.env.PORT || 4080))
+app.listen(process.env.PORT || 4050, function () {
+    console.log('Express app running on port ' + (process.env.PORT || 4050))
 });
