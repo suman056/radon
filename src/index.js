@@ -3,9 +3,12 @@ const express = require("express")
 const multer = require("multer")
 const mongoose = require("mongoose")
 const app = express()
-const route = require("./routes/route")
+const route = require("./routes/routes")
+const bodyParser=require("body-parser")
 
 app.use(multer().any())
+app.use(bodyParser.json())
+
 
 mongoose.connect("mongodb+srv://suman:Mdhang%40123@atlascluster.tlenk.mongodb.net/group74Database"
     , { useNewUrlParser: true })
