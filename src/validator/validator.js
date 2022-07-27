@@ -6,6 +6,10 @@ const isValidRequestBody =  function (requestBody) {
     if (Object.keys(requestBody).length == 0) return false;
     return true 
 }
+const isValidAlpha= function(value){
+    return /^[a-zA-Z ]+$/.test(value)
+
+}
 
 const isValidData = function (value) {
     if (typeof value === "undefined" || value === null) return false;
@@ -19,5 +23,5 @@ const isValidObjectId = function (objectId) {
 }
 
 module.exports = {
-    isValidRequestBody, isValidData, isValidObjectId
+    isValidRequestBody, isValidData, isValidObjectId,isValidAlpha
 }

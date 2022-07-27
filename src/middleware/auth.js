@@ -4,22 +4,26 @@ const {isValidRequestBody, isValidData, isValidObjectId} = require("../validator
 
 const authetication = function (req, res, next) {
     try {
-        const token = req.headers["x-Api-key"] || req.headers["x-api-key"]
+        const token1 = req.headers["authorization"]||req.headers["Authorization"]
+        let token= token1.split(" ")[1]
+
+      
         if (!token) {
             return res.status(401).send({ status: false, message: "token is missing" })
         }
         try {
             var decodedtoken = jwt.verify(token, "RoomNo-74", { ignoreExpiration: true });
-
+            
             if (Date.now() > decodedtoken.exp * 1000) {
                 return res.status(401).send({ status: false, message: "token is expired" });
             }
-
+            
         }
         catch (err) {
             return res.status(401).send({ status: false, msg: "token is invalid " })
-
+            
         }
+        console.log(1)
         req.decodedtoken = decodedtoken
         console.log("authenticated sucessfully")
         next()
@@ -33,6 +37,7 @@ const authorisation= function(req,res,next){
     try {
         let dToken=req.decodedtoken
         let userId=req.params.userId.trim()
+        
         if(!userId){
             return res.status(400).send({status:false,message:"userId is required in the request paramaters"})
         }

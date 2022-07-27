@@ -1,7 +1,7 @@
 const express= require("express")
 const router=express.Router()
-const {authetication}=require("../middleware/auth")
-const{getUserDetails,registerUser,login}=require("../controllers/userController")
+const {authetication,authorisation}=require("../middleware/auth")
+const{getUserDetails,registerUser,login,updateUser}=require("../controllers/userController")
 
 
 
@@ -13,7 +13,7 @@ router.post("/register",registerUser)
 
 router.post("/login",login)
 
-
+router.put("/user/:userId/profile",authetication,authorisation,updateUser)
 
 
 
