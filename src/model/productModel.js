@@ -16,14 +16,14 @@ const productSchema = new mongoose.Schema({
     },
     currencyId: {
         type: String,
-        required: true
+        required: true,
     },
     currencyFormat: {
         type: String,
         required: true,
     },
     isFreeShipping: {
-        Boolean: true,
+        type:Boolean,
         default: false
     },
     productImage: {

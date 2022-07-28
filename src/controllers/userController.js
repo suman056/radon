@@ -26,14 +26,13 @@ const registerUser = async function (req, res) {
               requestBody =JSON.parse(req.body.data)
               
         }
-        if(req.files)
-              {
+        
                 
-                requestBody.profileImage=req.files
-              }
+                let profileImage=req.files
+              
       
         //extract param
-        let { fname, lname, email, password, phone, address, profileImage } = requestBody
+        let { fname, lname, email, password, phone, address } = requestBody
         // console.log(profileImage)
         let missdata = ""
         
@@ -99,7 +98,7 @@ const registerUser = async function (req, res) {
                 }
             }
         }
-        if(profileImage.length==0){
+        if(!profileImage ||profileImage.length==0){
             missdata=missdata+" profileImage"
         }
         if (missdata) {
